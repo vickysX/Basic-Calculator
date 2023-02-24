@@ -52,8 +52,6 @@ fun CalculatorApp() {
     var operator by remember {
         mutableStateOf("")
     }
-    //var tempValue1 : Int
-    //var tempValue2 : Int
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,36 +63,38 @@ fun CalculatorApp() {
             onValueChange = {value = it}
         )
         Text(text = result.toString())
-        Row() {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
             OperationButton(
                 onClicked = {
                     result = 0.0
                     value = ""
                     operator = ""
-                    //tempValue1 = 0
-                    //tempValue2 = 0
                     notEqualClicks = 0
                 },
+                modifier = Modifier.weight(0.5f),
                 buttonValue = stringResource(id = R.string.reset_btn)
             )
             OperationButton(
                 onClicked = {
-                    //tempValue2 = value.toDouble()
                     result = calculateResult(
                         result, value.toDouble(), operator
-                    )/*when (operator) {
-                        "+" -> result + value.toDouble()
-                        "-" -> result - value.toDouble()
-                        ":" -> result / value.toDouble()
-                        else -> result * value.toDouble()
-                    }*/
+                    )
                     value = ""
                     notEqualClicks = 0
                 },
+                modifier = Modifier.weight(0.5f),
                 buttonValue = stringResource(id = R.string.equals_btn)
             )
         }
-        Row() {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             OperationButton(
                 onClicked = {
                     when (notEqualClicks) {
@@ -102,16 +102,9 @@ fun CalculatorApp() {
                             result = value.toDouble()
                         }
                         else -> {
-                            //tempValue2 = value.toDouble()
                             result = calculateResult(
                                 result, value.toDouble(), operator
-                            )/*when (operator) {
-                                "+" -> result + value.toDouble()
-                                "-" -> result - value.toDouble()
-                                ":" -> result / value.toDouble()
-                                else -> result * value.toDouble()
-                            }*/
-                            //tempValue1 = result
+                            )
                         }
                     }
                     operator = "+"
@@ -127,19 +120,11 @@ fun CalculatorApp() {
                             result = value.toDouble()
                         }
                         else -> {
-                            //tempValue2 = value.toDouble()
                             result = calculateResult(
                                 result, value.toDouble(), operator
-                            )/*when (operator) {
-                                "+" -> result + value.toDouble()
-                                "-" -> result - value.toDouble()
-                                ":" -> result / value.toDouble()
-                                else -> result * value.toDouble()
-                            }*/
-                            //tempValue1 = result
+                            )
                         }
                     }
-                    //result = tempValue1
                     operator = "-"
                     value = ""
                     notEqualClicks++
@@ -153,19 +138,11 @@ fun CalculatorApp() {
                             result = value.toDouble()
                         }
                         else -> {
-                            //tempValue2 = value.toDouble()
                             result = calculateResult(
                                 result, value.toDouble(), operator
-                            )/*when (operator) {
-                                "+" -> result + value.toDouble()
-                                "-" -> result - value.toDouble()
-                                ":" -> result / value.toDouble()
-                                else -> result * value.toDouble()
-                            }*/
-                            //tempValue1 = result
+                            )
                         }
                     }
-                    //result = tempValue1
                     operator = "x"
                     value = ""
                     notEqualClicks++
@@ -179,16 +156,9 @@ fun CalculatorApp() {
                             result = value.toDouble()
                         }
                         else -> {
-                            //tempValue2 = value.toDouble()
                             result = calculateResult(
                                 result, value.toDouble(), operator
-                            )/*when (operator) {
-                                "+" -> result + value.toDouble()
-                                "-" -> result - value.toDouble()
-                                ":" -> result / value.toDouble()
-                                else -> result * value.toDouble()
-                            }*/
-                            //tempValue1 = result
+                            )
                         }
                     }
                     operator = ":"
@@ -231,7 +201,10 @@ fun OperationButton(
     buttonValue : String,
     modifier: Modifier = Modifier
 ) {
-    Button(onClick = onClicked) {
+    Button(
+        onClick = onClicked,
+        modifier = modifier
+    ) {
         Text(text = buttonValue)
     }
 }
