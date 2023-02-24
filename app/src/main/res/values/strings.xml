@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Basic Calculator</string>
+
+    <string name="reset_btn">C</string>
+    <string name="equals_btn">=</string>
+    <string name="plus_btn">+</string>
+    <string name="minus_btn">-</string>
+    <string name="times_btn">x</string>
+    <string name="division_btn">:</string>
+</resources>
